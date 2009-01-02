@@ -104,7 +104,7 @@ module PermalinkFu
   protected
     def create_common_permalink
       return unless should_create_permalink?
-      if read_attribute(self.class.permalink_field).to_s.empty?
+      if should_create_permalink? || read_attribute(self.class.permalink_field).to_s.empty?
         send("#{self.class.permalink_field}=", create_permalink_for(self.class.permalink_attributes))
       end
       limit   = self.class.columns_hash[self.class.permalink_field].limit
